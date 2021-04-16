@@ -9,7 +9,6 @@ django-filter = "*"
 psycopg2-binary = "*"
 Django = "*"
 Markdown = "*"
-djangorestframework-simplejwt = "*"
 
 [dev-packages]
 
