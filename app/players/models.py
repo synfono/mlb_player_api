@@ -14,6 +14,13 @@ THROWS_CHOICES = (
     ("Left", "Left"),
 )
 
+class Team(models.Model):
+    name = models.CharField(max_length=100)
+    location = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f'{self.name}'
+
 class Player(models.Model):
     slug = models.SlugField(null=True)
     first_name = models.CharField(max_length=50)
@@ -25,6 +32,7 @@ class Player(models.Model):
     height = models.IntegerField(help_text="Centimeter")
     weight = models.IntegerField(help_text="Kilometer")
     retired = models.BooleanField(default=False)
+    teams = models.ManyToManyField(Team, related_name='Teams', blank=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:

@@ -1,4 +1,4 @@
-from players.models import Player
+from players.models import Player, Team
 from rest_framework import serializers
 
 class PlayerSerializer(serializers.ModelSerializer):
@@ -6,4 +6,9 @@ class PlayerSerializer(serializers.ModelSerializer):
         model = Player
         fields = "__all__"
         lookup_field = 'slug'
+        
+class TeamSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Team
+        fields = "__all__"
         

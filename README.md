@@ -1,10 +1,25 @@
 
 
-### Example Usage
+## Example Usage
 
-#### Curl<br />
+### Obtaining Token
+
 ``` bash
-curl -X POST -H "Content-type: application/json" -d '{
+TOKEN=$(curl -s -X POST -H 'Content-Type: application/json' -d '{"username":"admin","password":"password"}' 'http://localhost:8000/api-token-auth/' | jq -r '.token')
+```
+
+### Add Team example
+``` bash
+curl -X POST -H "Content-type: application/json" -H "Authorization: Token ${TOKEN}" -d '{
+    "name": "Atlanta Braves",
+    "location": "Atlanta, Georgia"
+}' 'http://localhost:8000/teams/'
+
+```
+
+### Add Player example<br />
+``` bash
+curl -X POST -H "Content-type: application/json" -H "Authorization: Token ${TOKEN}" -d '{
     "first_name": "Chipper",
     "last_name": "Jones",
     "born": "1972-04-24",
@@ -13,6 +28,8 @@ curl -X POST -H "Content-type: application/json" -d '{
     "throws": "Right",
     "height": 193,
     "weight": 95,
-    "retired": true
+    "retired": true,
+    "teams": [1] # IDs returned from Teams
 }' 'http://localhost:8000/players/'
 ```
+
